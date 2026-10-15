@@ -420,7 +420,11 @@ python server\migrate_data.py pack --out deploy-seed
 
 Then on Render: create the disk (the blueprint already declares it),
 upload the five seed files as **Secret Files** (or any private mount)
-and set `SEED_DIR` to their directory. On first boot the server copies
+and set `SEED_DIR` to their directory.  On Render, Secret Files mount
+under `/etc/secrets`, so creating five secret files named exactly like
+the data files and setting `SEED_DIR=/etc/secrets` is enough — the
+seeder only ever copies the five known filenames and ignores anything
+else in that folder.  On first boot the server copies
 those files into the **empty** `DATA_DIR`; every later boot leaves
 existing data untouched — a seed can never overwrite live state, and a
 file that is not valid JSON is skipped with a warning instead of

@@ -245,8 +245,9 @@ python server\migrate_data.py backup --note pre_deploy   # back up + verify
 python server\migrate_data.py pack --out deploy-seed     # seed for first boot
 ```
 
-Upload the seed files as a private platform secret, set `SEED_DIR` to
-their path, and the first boot copies them into the empty disk (existing
+Upload the five seed files as Render **Secret Files** (they mount under
+`/etc/secrets`, so set `SEED_DIR=/etc/secrets`), and the first boot
+copies them into the empty disk (existing
 data is never overwritten). Details, risks and rollback:
 **`server/README.md` → §10 Production deployment**.
 
