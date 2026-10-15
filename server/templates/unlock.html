@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="theme-color" content="#0a0306">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <script>document.documentElement.className += ' js';</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/unlock.css">
+</head>
+<body class="unlock-body" data-slug="{{SLUG}}" data-mode="{{MODE}}">
+
+  <!-- Background layers (same as the rest of the site) -->
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <header class="nav" id="nav">
+    <div class="container">
+      <a href="/index.html" class="brand" aria-label="Home">
+        <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
+        <span class="brand-name">SPLIX X <span>CHEAT</span></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/index.html#features" class="nav-link">Features</a>
+        <a href="/plus.html" class="nav-link nav-link--plus"><i class="fa-solid fa-crown"></i>&nbsp;PLUS</a>
+        <a href="/index.html#community" class="nav-link">Community</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="{{COMMUNITY_URL}}" class="btn btn-primary btn-sm">
+          <i class="fa-brands fa-discord"></i> JOIN COMMUNITY
+        </a>
+        <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/index.html" class="nav-link">Home</a>
+    <a href="/index.html#features" class="nav-link">Features</a>
+    <a href="/plus.html" class="nav-link nav-link--plus"><i class="fa-solid fa-crown"></i>&nbsp;PLUS</a>
+    <a href="/index.html#community" class="nav-link">Community</a>
+    <a href="{{COMMUNITY_URL}}" class="btn btn-primary"><i class="fa-brands fa-discord"></i> JOIN COMMUNITY</a>
+  </div>
+
+  <main class="unlock-main">
+    <div class="unlock-wrap">
+
+      <div class="unlock-head">
+        <h1 class="unlock-title glow-text">{{H1}}</h1>
+        <p class="unlock-pill">{{DESCRIPTION}}</p>
+      </div>
+
+      <div class="unlock-card">
+
+        <!-- Honest status / mode notice (never claims success) -->
+        <div class="unlock-notice" id="unlockNotice" hidden></div>
+
+        <!-- Required step(s): task A (subscribe/custom) server-rendered;
+             task B (video Like) injected by js/unlock.js when configured -->
+        <a class="unlock-step" id="stepBtn" data-task-card="subscribe"
+           href="{{ACTION_URL}}" target="_blank" rel="noopener noreferrer">
+          <i class="{{ACTION_ICON}}" aria-hidden="true"></i>
+          <span id="stepLabel">{{ACTION_LABEL}}</span>
+          <span class="unlock-task-state" data-task-state="subscribe" hidden>NOT STARTED</span>
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+        <div id="taskExtra"></div>
+
+        <!-- Progress -->
+        <p class="unlock-count">Steps Completed <strong id="stepCount">0/{{STEPS_TOTAL}}</strong></p>
+        <div class="unlock-bar" id="stepBar" role="progressbar" aria-valuemin="0" aria-valuemax="{{STEPS_TOTAL}}" aria-valuenow="0">
+          <span id="stepFill"></span>
+        </div>
+
+        <!-- Verification -->
+        <button class="btn btn-ghost btn-block" id="verifyBtn" type="button">
+          <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+          <span id="verifyLabel">VERIFY SUBSCRIPTION</span>
+        </button>
+
+        <!-- Like-step action (honor confirm or its review) — injected by JS -->
+        <div id="likeActionWrap"></div>
+
+        <!-- Locked destination -->
+        <button class="btn btn-soon btn-block" id="claimBtn" type="button" disabled>
+          <i class="fa-solid fa-link"></i>
+          <span id="claimLabel">GET YOUR LINK</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <p class="unlock-help">
+          The destination stays locked until this server confirms the step with the platform.
+          Opening or clicking the link alone does not unlock it.
+        </p>
+      </div>
+
+      <p class="unlock-foot-note">
+        <i class="fa-solid fa-shield-halved"></i>
+        Verification happens on our server. No password or payment is ever requested on this page.
+      </p>
+    </div>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/index.html" class="brand">
+            <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
+            <span class="brand-name">{{SITE_NAME}}</span>
+          </a>
+          <p>{{SITE_DESCRIPTION}}</p>
+          <div class="footer-contact">
+            {{SITE_CONTACT}}
+          </div>
+        </div>
+
+        <div>
+          <h4>Useful Links</h4>
+          <div class="footer-links">
+            <a href="/index.html">Home</a>
+            <a href="/plus.html">PLUS Membership</a>
+            <a href="/index.html#features">Features</a>
+            <a href="/index.html#community">Community</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Follow Us</h4>
+          <p class="footer-follow">Follow us on our social media profiles to get the latest updates.</p>
+          <div class="socials">
+            {{SITE_SOCIALS}}
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="year">{{YEAR}}</span> {{SITE_NAME}}. All rights reserved.</p>
+        <p class="footer-note">{{SITE_DISCLAIMER}}</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-circle-info"></i>
+    <span id="toastText">Please wait…</span>
+  </div>
+
+  <script src="/js/particles.js"></script>
+  <script src="/js/unlock.js"></script>
+</body>
+</html>

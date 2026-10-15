@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SPLIX X CHEAT — Free Fire Gaming Community</title>
+  <meta name="description" content="SPLIX X CHEAT is an independent Free Fire gaming community offering tutorials, settings guides, gameplay tips and the latest gaming news.">
+  <meta name="theme-color" content="#0a0306">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <script>document.documentElement.className += ' js';</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <header class="nav" id="nav">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="SPLIX X CHEAT home">
+        <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
+        <span class="brand-name">SPLIX X <span>CHEAT</span></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="plus.html" class="nav-link nav-link--plus"><i class="fa-solid fa-crown"></i>&nbsp;PLUS</a>
+        <a href="#tutorials" class="nav-link">Tutorials</a>
+        <a href="#community" class="nav-link">Community</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="#community" class="btn btn-primary btn-sm js-community">
+          <i class="fa-brands fa-discord"></i> JOIN COMMUNITY
+        </a>
+        <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" class="nav-link active">Home</a>
+    <a href="#features" class="nav-link">Features</a>
+    <a href="plus.html" class="nav-link nav-link--plus"><i class="fa-solid fa-crown"></i>&nbsp;PLUS</a>
+    <a href="#tutorials" class="nav-link">Tutorials</a>
+    <a href="#community" class="nav-link">Community</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="#community" class="btn btn-primary js-community"><i class="fa-brands fa-discord"></i> JOIN COMMUNITY</a>
+  </div>
+
+  <main>
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home">
+      <div class="hero-glow hero-glow--a" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow--b" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="hero-inner">
+          <span class="eyebrow reveal">Free Fire Community</span>
+          <h1 class="glow-text reveal" data-delay="1" data-brand="name">SPLIX X CHEAT</h1>
+          <p class="hero-sub reveal" data-delay="2" data-brand="tagline">YOUR ULTIMATE GAMING COMMUNITY</p>
+          <p class="hero-desc reveal" data-delay="3" data-brand="description">
+            Discover gaming tutorials, community updates, useful resources, and the latest Free Fire news.
+          </p>
+          <div class="hero-actions reveal" data-delay="4">
+            <a href="#community" class="btn btn-primary js-community">
+              <i class="fa-brands fa-discord"></i> JOIN OUR COMMUNITY
+            </a>
+            <a href="#features" class="btn btn-ghost">
+              <i class="fa-solid fa-rocket"></i> EXPLORE FEATURES
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="#stats" class="scroll-cue" aria-label="Scroll down">
+        <span>SCROLL</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+    </section>
+
+    <!-- ===================== STATS ===================== -->
+    <section class="section section--tight" id="stats">
+      <div class="container">
+        <div class="stats-grid" id="statsGrid"><!-- rendered by js/main.js --></div>
+      </div>
+    </section>
+
+    <!-- ===================== FEATURES ===================== -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">What we offer</span>
+          <h2 class="glow-text">Everything in one place</h2>
+          <div class="rule"></div>
+          <p>Tutorials, news, support and a community that actually helps you improve.</p>
+        </div>
+        <div class="grid-3" id="featuresGrid"><!-- rendered by js/main.js --></div>
+      </div>
+    </section>
+
+    <!-- ===================== TUTORIALS ===================== -->
+    <section class="section" id="tutorials">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Learn &amp; improve</span>
+          <h2 class="glow-text">Latest Tutorials</h2>
+          <div class="rule"></div>
+          <p>Clear, practical guides covering settings, setup, gameplay and news.</p>
+        </div>
+        <div class="grid-3" id="tutorialsGrid"><!-- rendered by js/main.js --></div>
+      </div>
+    </section>
+
+    <!-- ============ BANNER 1 · PRICE OF PANEL ============ -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="banner reveal">
+          <div class="banner-binary" aria-hidden="true"></div>
+          <div class="banner-sweep" aria-hidden="true"></div>
+
+          <div class="banner-inner">
+            <p class="banner-brand banner-brand--hero">SPLIX X CHEAT</p>
+            <h2 class="banner-title" id="panelTitle">PRICE OF PANEL</h2>
+            <div class="banner-rule" aria-hidden="true"></div>
+          </div>
+
+          <div class="price-boxes" id="priceBoxes"><!-- rendered by js/main.js --></div>
+
+          <p class="banner-footnote" id="priceFootnote"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BANNER 2 · PAYMENT METHOD ============ -->
+    <section class="section" id="payment">
+      <div class="container">
+        <div class="banner reveal">
+          <div class="banner-binary" aria-hidden="true"></div>
+          <div class="banner-sweep" aria-hidden="true"></div>
+
+          <div class="banner-inner">
+            <h2 class="banner-title" id="paymentTitle">PAYMENT METHOD</h2>
+            <div class="banner-rule" aria-hidden="true"></div>
+          </div>
+
+          <!-- Decorative 3D card. It is purely visual: it is not a real
+               card, collects nothing, and is hidden from screen readers. -->
+          <div class="pay-stage" aria-hidden="true">
+            <div class="pay-card">
+              <div class="pay-chip"></div>
+              <div>
+                <div class="pay-card-dots">&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;</div>
+                <div class="pay-card-brand">SPLIX X CHEAT</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pay-methods" id="payMethods"><!-- rendered by js/main.js --></div>
+
+          <p class="banner-brand banner-brand--foot">SPLIX X CHEAT</p>
+          <p class="banner-footnote" id="paymentBannerNotice"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COMMUNITY ===================== -->
+    <section class="section" id="community">
+      <div class="container">
+        <div class="community-wrap">
+          <div class="community-copy reveal">
+            <span class="eyebrow">Join us</span>
+            <h2 class="glow-text" data-community="title">JOIN OUR COMMUNITY</h2>
+            <div class="rule" style="margin:0"></div>
+            <p data-community="text">
+              Connect with the SPLIX X CHEAT community, get notified about new tutorials first, and take part in events and giveaways.
+            </p>
+            <ul class="community-list" id="communityList"><!-- rendered by js/main.js --></ul>
+            <div class="community-actions">
+              <a href="#" class="btn btn-discord js-link" data-link="discord">
+                <i class="fa-brands fa-discord"></i> JOIN DISCORD
+              </a>
+              <a href="#" class="btn btn-ghost js-link" data-link="youtube">
+                <i class="fa-brands fa-youtube"></i> VISIT YOUTUBE
+              </a>
+              <a href="#" class="btn btn-ghost js-link" data-link="tiktok">
+                <i class="fa-brands fa-tiktok"></i> FOLLOW ON TIKTOK
+              </a>
+            </div>
+          </div>
+
+          <div class="panel-visual reveal" data-delay="2">
+            <div class="panel-head">
+              <span class="panel-title">Community Feed</span>
+              <span class="panel-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+            </div>
+            <div class="panel-rows">
+              <div class="panel-row"><i class="fa-solid fa-book-open"></i><span>New tutorial published</span><small>TUTORIALS</small></div>
+              <div class="panel-row"><i class="fa-solid fa-bullhorn"></i><span>Community announcement</span><small>NEWS</small></div>
+              <div class="panel-row"><i class="fa-solid fa-trophy"></i><span>Event &amp; giveaway drop</span><small>EVENTS</small></div>
+              <div class="panel-row"><i class="fa-solid fa-headset"></i><span>Support answered your question</span><small>SUPPORT</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Got questions?</span>
+          <h2 class="glow-text">Frequently Asked</h2>
+          <div class="rule"></div>
+          <p>Quick answers to the things people ask us most often.</p>
+        </div>
+        <div class="faq-list" id="faqList"><!-- rendered by js/main.js --></div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="cta-band reveal">
+          <span class="eyebrow">Ready?</span>
+          <h2 class="glow-text" style="margin-top:18px">Level up with SPLIX PLUS</h2>
+          <p>Discover exclusive premium content, advanced tutorials and priority support — built for players who want more.</p>
+          <div class="cta-actions">
+            <a href="plus.html" class="btn btn-primary"><i class="fa-solid fa-crown"></i> EXPLORE PLUS</a>
+            <a href="#community" class="btn btn-ghost js-community"><i class="fa-brands fa-discord"></i> JOIN COMMUNITY</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand">
+            <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
+            <span class="brand-name">SPLIX X <span>CHEAT</span></span>
+          </a>
+          <p>An independent Free Fire gaming community for tutorials, news and players who want to improve.</p>
+        </div>
+
+        <div>
+          <h4>Quick Links</h4>
+          <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#tutorials">Tutorials</a>
+            <a href="plus.html">PLUS Membership</a>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Connect</h4>
+          <div class="socials">
+            <a href="#" class="social-btn social-btn--youtube js-link" data-link="youtube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="social-btn js-link" data-link="discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="#" class="social-btn social-btn--tiktok js-link" data-link="tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="year">2026</span> <span data-brand="copyright">SPLIX X CHEAT Community</span>. All rights reserved.</p>
+        <p class="footer-note" data-brand="disclaimer">
+          This website is an independent gaming community. It is not affiliated with, endorsed by, or connected to Garena Free Fire or Garena in any way.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast (shown when a link is still a placeholder) -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-circle-info"></i>
+    <span id="toastText">Link not configured yet.</span>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/particles.js"></script>
+</body>
+</html>

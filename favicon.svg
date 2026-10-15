@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="sx" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff4454"/>
+      <stop offset="1" stop-color="#9e0f23"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.12" r="0.95">
+      <stop offset="0" stop-color="#ff2d3a" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#ff2d3a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- black rounded tile -->
+  <rect x="2" y="2" width="96" height="96" rx="20" fill="#0a0306"/>
+  <rect x="2" y="2" width="96" height="96" rx="20" fill="url(#glow)"/>
+  <!-- neon red rim -->
+  <rect x="2.6" y="2.6" width="94.8" height="94.8" rx="19.4" fill="none" stroke="#ff5f4d" stroke-width="3.2"/>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="12">
+    <!-- blocky S (white metallic) -->
+    <path d="M34 30 H14 V46 H34 V70 H14" stroke="#f6f1f1"/>
+    <!-- bold X (brand red gradient) -->
+    <path d="M52 28 L84 72" stroke="url(#sx)"/>
+    <path d="M84 28 L52 72" stroke="url(#sx)"/>
+  </g>
+</svg>

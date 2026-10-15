@@ -1,0 +1,6 @@
+# The SPLIX unlock server runs on the Python 3 standard library only —
+# no third-party packages are required.  This file exists so hosting
+# build commands (e.g. `pip install -r server/requirements.txt` on
+# Render) are explicit, deterministic and reproducible.
+#
+# Python version: 3.10+ (developed and tested on 3.12).

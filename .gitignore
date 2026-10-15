@@ -1,0 +1,40 @@
+# =============================================================
+#  SPLIX X CHEAT — git ignore rules
+# -------------------------------------------------------------
+#  NEVER commit secrets or runtime data.
+# =============================================================
+
+# --- Secrets ---------------------------------------------------
+# The real environment file holds ADMIN_TOKEN, Google OAuth
+# credentials and the Discord webhook URL.  Only .env.example
+# (with empty placeholders) may be committed.
+server/.env
+.env
+*.env
+!server/.env.example
+
+# --- Runtime data (links, sessions, reviews, audit log) -------
+server/data/
+server/backups/
+
+# --- Deployment seed packs (contain destination URLs) ---------
+# Output of `python server/migrate_data.py pack --out deploy-seed`.
+# Seed packs must NEVER be committed or pushed — they hold the same
+# secrets as server/data/.
+deploy-seed/
+*.seed.json
+
+# --- Python ---------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# --- OS / editor noise ----------------------------------------
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.tmp
+*.log
+*.bak

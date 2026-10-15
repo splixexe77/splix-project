@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unlock Link Manager — SPLIX X CHEAT</title>
+  <meta name="description" content="Admin panel to create, edit and remove subscription-gated unlock links.">
+  <meta name="theme-color" content="#0a0306">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <script>document.documentElement.className += ' js';</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/unlock.css">
+</head>
+<body class="unlock-body">
+
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <header class="nav" id="nav">
+    <div class="container">
+      <a href="/index.html" class="brand" aria-label="Home">
+        <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
+        <span class="brand-name">SPLIX X <span>CHEAT</span></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/index.html#features" class="nav-link">Features</a>
+        <a href="/plus.html" class="nav-link nav-link--plus"><i class="fa-solid fa-crown"></i>&nbsp;PLUS</a>
+        <a href="/index.html#community" class="nav-link">Community</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="/index.html" class="btn btn-ghost btn-sm"><i class="fa-solid fa-house"></i> VIEW SITE</a>
+        <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/index.html" class="nav-link">Home</a>
+    <a href="/plus.html" class="nav-link nav-link--plus"><i class="fa-solid fa-crown"></i>&nbsp;PLUS</a>
+    <a href="/index.html#community" class="nav-link">Community</a>
+    <a href="/index.html" class="btn btn-ghost"><i class="fa-solid fa-house"></i> VIEW SITE</a>
+  </div>
+
+  <main class="adm-main">
+    <div class="adm-wrap">
+
+      <div class="adm-head">
+        <span class="eyebrow">Admin only</span>
+        <h1 class="glow-text">Unlock Link Manager</h1>
+        <p class="adm-sub">
+          Create, edit and remove subscription-gated links — copy the unlock URL and share it
+          anywhere. No source-code edits needed.
+        </p>
+      </div>
+
+      <!-- ============ TOKEN GATE ============ -->
+      <section class="adm-gate" id="gate">
+        <h2><i class="fa-solid fa-key"></i> Admin access</h2>
+        <div class="adm-field">
+          <label for="adminToken">Admin token</label>
+          <input type="password" id="adminToken" autocomplete="current-password"
+                 placeholder="Paste the ADMIN_TOKEN value">
+          <span class="adm-hint">
+            Set it in <code class="adm-code">server/.env</code> as
+            <code class="adm-code">ADMIN_TOKEN=…</code>, then restart the server.
+            The token is kept only in this browser tab.
+          </span>
+        </div>
+        <button class="btn btn-primary btn-block" id="gateBtn" type="button">UNLOCK PANEL</button>
+        <p class="adm-note" id="gateNote"></p>
+      </section>
+
+      <!-- ============ PANEL ============ -->
+      <section id="panel" hidden>
+
+        <div class="adm-banner" id="modeBanner" hidden></div>
+
+        <div class="adm-stats" id="statGrid">
+          <div class="adm-stat"><b id="statLinks">0</b><span>Links</span></div>
+          <div class="adm-stat"><b id="statPending">0</b><span>Pending reviews</span></div>
+          <div class="adm-stat"><b id="statSessions">0</b><span>Live sessions</span></div>
+          <div class="adm-stat"><b id="statVisits">0</b><span>Page visits</span></div>
+          <div class="adm-stat"><b id="statVerified">0</b><span>Verifications</span></div>
+          <div class="adm-stat"><b id="statUnlocks">0</b><span>Unlocks</span></div>
+          <div class="adm-stat"><b id="statMode">—</b><span>Verification</span></div>
+        </div>
+
+        <div class="adm-tabs" role="tablist">
+          <button class="adm-tab active" data-tab="links" type="button">Links</button>
+          <button class="adm-tab" data-tab="reviews" type="button">Manual reviews</button>
+          <button class="adm-tab" data-tab="activity" type="button">Activity</button>
+          <button class="adm-tab" data-tab="settings" type="button">Site &amp; footer</button>
+        </div>
+
+        <!-- ---------- LINKS ---------- -->
+        <div class="adm-panel" id="tab-links">
+          <div class="adm-btns" style="justify-content:space-between; margin-bottom:18px;">
+            <button class="btn btn-primary" id="newLinkBtn" type="button">
+              <i class="fa-solid fa-plus"></i> NEW UNLOCK LINK
+            </button>
+            <span class="adm-note" id="linkHint"></span>
+          </div>
+
+          <div id="linkFormWrap" hidden style="margin-bottom:26px;">
+            <h2 id="formTitle">New unlock link</h2>
+            <form class="adm-form" id="linkForm" novalidate>
+              <div class="adm-field adm-field--full">
+                <label for="fTitle">Page title</label>
+                <input type="text" id="fTitle" maxlength="120" required
+                       placeholder="Complete Steps to Get Link">
+              </div>
+              <div class="adm-field">
+                <label for="fSlug">Slug (part of the unlock URL)</label>
+                <input type="text" id="fSlug" maxlength="64" placeholder="auto-generated">
+                <span class="adm-hint">Lowercase letters, numbers, hyphens. Leave blank to generate one.</span>
+              </div>
+              <div class="adm-field">
+                <label for="fType">Required step type</label>
+                <select id="fType">
+                  <option value="youtube_subscribe">YouTube subscription</option>
+                  <option value="custom">Custom link (any destination)</option>
+                </select>
+              </div>
+              <div class="adm-field adm-field--full">
+                <label for="fDestination">Destination URL (kept secret on the server)</label>
+                <input type="url" id="fDestination" required
+                       placeholder="https://…  —  the URL users receive after verification">
+              </div>
+              <div class="adm-field">
+                <label for="fActionLabel">Step button label</label>
+                <input type="text" id="fActionLabel" maxlength="60" placeholder="Subscribe Channel">
+              </div>
+              <div class="adm-field">
+                <label for="fActionUrl">Step URL (channel / subscribe link)</label>
+                <input type="url" id="fActionUrl" required
+                       placeholder="https://www.youtube.com/channel/UC…?sub_confirmation=1">
+              </div>
+              <div class="adm-field">
+                <label for="fChannelUrl">YouTube channel URL (Subscribe task)</label>
+                <input type="url" id="fChannelUrl"
+                       placeholder="https://www.youtube.com/@yourchannel">
+                <span class="adm-hint">Shown as the SUBSCRIBE task card. Leave blank to use the Step URL.</span>
+              </div>
+              <div class="adm-field">
+                <label for="fVideoUrl">YouTube video URL (Like task)</label>
+                <input type="url" id="fVideoUrl"
+                       placeholder="https://www.youtube.com/watch?v=…">
+                <span class="adm-hint">Adds a second LIKE task card. Leave blank for a subscribe-only link.</span>
+              </div>
+              <div class="adm-field adm-field--full">
+                <label for="fLikeMethod">Like verification policy (honest)</label>
+                <select id="fLikeMethod">
+                  <option value="manual">Moderator review — approve each like by hand (default)</option>
+                  <option value="honor">Honor system — visitor self-confirms; shown as CONFIRMED, never as verified</option>
+                </select>
+                <span class="adm-hint">YouTube's API cannot show whether a specific viewer liked a video,
+                  so the LIKE task is never auto-verified. Choose how to handle it honestly.</span>
+              </div>
+              <div class="adm-field adm-field--full">
+                <label for="fDescription">Subtitle pill text</label>
+                <input type="text" id="fDescription" maxlength="200"
+                       placeholder="COMPLETE ALL THE STEPS BELOW">
+              </div>
+              <div class="adm-field adm-field--full">
+                <label class="adm-check">
+                  <input type="checkbox" id="fEnabled" checked>
+                  Link is active (uncheck to disable the unlock page without deleting it)
+                </label>
+              </div>
+              <div class="adm-field adm-field--full adm-btns">
+                <button class="btn btn-primary" type="submit" id="saveLinkBtn">SAVE LINK</button>
+                <button class="btn btn-ghost" type="button" id="cancelLinkBtn">CANCEL</button>
+                <span class="adm-note" id="formNote"></span>
+              </div>
+            </form>
+          </div>
+
+          <div class="adm-table-wrap">
+            <table class="adm-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Unlock URL</th>
+                  <th>Step</th>
+                  <th>Stats</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="linkRows"></tbody>
+            </table>
+          </div>
+          <div class="adm-empty" id="linksEmpty" hidden>
+            No links yet. Click <b>NEW UNLOCK LINK</b> to create your first one.
+          </div>
+        </div>
+
+        <!-- ---------- REVIEWS ---------- -->
+        <div class="adm-panel" id="tab-reviews" hidden>
+          <h2>Manual review requests</h2>
+          <p class="adm-note" id="reviewsIntro">
+            These appear when a step cannot be verified automatically: the visitor completes the steps,
+            requests a review, and you approve it here after checking by hand.
+            Approving grants the requirements this review covers; rejecting keeps the link locked.
+            When automatic YouTube verification is active, a review only ever covers the LIKE step —
+            the subscribe step must still be verified with Google first.
+          </p>
+          <div class="adm-table-wrap" style="margin-top:16px;">
+            <table class="adm-table">
+              <thead>
+                <tr>
+                  <th>Request</th>
+                  <th>Link</th>
+                  <th>Requested (UTC)</th>
+                  <th>State</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reviewRows"></tbody>
+            </table>
+          </div>
+          <div class="adm-empty" id="reviewsEmpty" hidden>No review requests right now.</div>
+        </div>
+
+        <!-- ---------- ACTIVITY ---------- -->
+        <div class="adm-panel" id="tab-activity" hidden>
+          <h2>Activity log</h2>
+          <p class="adm-note" style="margin-bottom:16px;">
+            Audit trail of link creation, verification attempts, successful unlocks and admin
+            actions. Destination URLs and tokens are never written here.
+          </p>
+          <div class="adm-table-wrap">
+            <table class="adm-table">
+              <thead>
+                <tr>
+                  <th>Time (UTC)</th>
+                  <th>Event</th>
+                  <th>Link</th>
+                </tr>
+              </thead>
+              <tbody id="eventRows"></tbody>
+            </table>
+          </div>
+          <div class="adm-empty" id="eventsEmpty" hidden>No activity recorded yet.</div>
+        </div>
+
+        <!-- ---------- SETTINGS ---------- -->
+        <div class="adm-panel" id="tab-settings" hidden>
+          <h2>Website information &amp; social links</h2>
+          <p class="adm-note" style="margin-bottom:18px;">
+            These values power the footer and contact block shown on every unlock page.
+          </p>
+          <form class="adm-form" id="settingsForm" novalidate>
+            <div class="adm-field">
+              <label for="sSiteName">Site name</label>
+              <input type="text" id="sSiteName" maxlength="80">
+            </div>
+            <div class="adm-field">
+              <label for="sChannel">YouTube channel ID (for official verification)</label>
+              <input type="text" id="sChannel" maxlength="64" placeholder="UC…">
+              <span class="adm-hint">YouTube Studio → Settings → Advanced → Channel ID. Required for automatic verification.</span>
+            </div>
+            <div class="adm-field adm-field--full">
+              <label for="sDescription">Footer description</label>
+              <textarea id="sDescription" maxlength="400"></textarea>
+            </div>
+            <div class="adm-field">
+              <label for="sLocation">Location</label>
+              <input type="text" id="sLocation" maxlength="120" placeholder="City, Country">
+            </div>
+            <div class="adm-field">
+              <label for="sEmail">Email</label>
+              <input type="email" id="sEmail" maxlength="120" placeholder="info@example.com">
+            </div>
+            <div class="adm-field">
+              <label for="sPhone">Phone (optional)</label>
+              <input type="text" id="sPhone" maxlength="60">
+            </div>
+            <div class="adm-field adm-field--full">
+              <label for="sDisclaimer">Disclaimer</label>
+              <textarea id="sDisclaimer" maxlength="400"></textarea>
+            </div>
+
+            <div class="adm-field"><label for="sYoutube">YouTube URL</label><input type="url" id="sYoutube"></div>
+            <div class="adm-field"><label for="sDiscord">Discord invite</label><input type="url" id="sDiscord"></div>
+            <div class="adm-field"><label for="sTiktok">TikTok URL</label><input type="url" id="sTiktok"></div>
+            <div class="adm-field"><label for="sX">X (Twitter) URL</label><input type="url" id="sX"></div>
+            <div class="adm-field"><label for="sFacebook">Facebook URL</label><input type="url" id="sFacebook"></div>
+            <div class="adm-field"><label for="sInstagram">Instagram URL</label><input type="url" id="sInstagram"></div>
+            <div class="adm-field"><label for="sLinkedin">LinkedIn URL</label><input type="url" id="sLinkedin"></div>
+
+            <div class="adm-field adm-field--full adm-btns">
+              <button class="btn btn-primary" type="submit" id="saveSettingsBtn">SAVE SETTINGS</button>
+              <span class="adm-note" id="settingsNote"></span>
+            </div>
+          </form>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; <span id="year">2026</span> <span>SPLIX X CHEAT Community</span>. All rights reserved.</p>
+        <p class="footer-note">
+          Admin panel — never share your token. Verification credentials live in server/.env only.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-circle-info"></i>
+    <span id="toastText">Saved.</span>
+  </div>
+
+  <script src="/js/particles.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

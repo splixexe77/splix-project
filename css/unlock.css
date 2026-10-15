@@ -1,0 +1,430 @@
+/* =============================================================
+   SPLIX X CHEAT  —  unlock page + admin panel  (css/unlock.css)
+   Loaded AFTER style.css — reuses the same :root design tokens
+   (dark esports theme, red accents), so the new feature matches
+   the rest of the website on desktop and mobile.
+   ============================================================= */
+
+/* ---------- 1. PAGE SHELL ---------- */
+.unlock-body { min-height: 100vh; display: flex; flex-direction: column; }
+
+.unlock-main {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 auto;
+  padding: calc(var(--nav-h) + 64px) 0 90px;
+}
+.unlock-wrap { width: 100%; max-width: 720px; margin-inline: auto; padding-inline: 24px; }
+
+.unlock-head { text-align: center; }
+.unlock-title {
+  font-size: clamp(1.75rem, 5.2vw, 2.85rem);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.unlock-pill {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 9px 20px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: rgba(255, 95, 77, .07);
+  box-shadow: inset 0 0 18px rgba(255, 95, 77, .08);
+  color: var(--red-bright);
+  font-family: var(--font-display);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+}
+
+/* ---------- 2. THE CARD ---------- */
+.unlock-card {
+  margin-top: 34px;
+  padding: 34px 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+  backdrop-filter: blur(14px);
+  box-shadow: var(--glow-lg), inset 0 1px 0 rgba(255,255,255,.07);
+  display: grid;
+  gap: 22px;
+}
+.unlock-card--center { text-align: center; justify-items: center; }
+
+/* Honest status / mode notice */
+.unlock-notice {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--red-bright);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .04);
+  color: var(--text);
+  font-size: .95rem;
+  line-height: 1.55;
+}
+.unlock-notice b { color: var(--text); }
+.unlock-notice--info    { border-left-color: var(--ember); }
+.unlock-notice--warn    { border-left-color: var(--ember); background: rgba(255,171,96,.07); }
+.unlock-notice--success { border-left-color: #3ddc97; background: rgba(61,220,151,.07); }
+.unlock-notice--error   { border-left-color: var(--red);  background: rgba(255,45,58,.09); }
+.unlock-notice--static  { border-left-color: var(--red-bright); margin-bottom: 26px; }
+
+/* ---------- 3. STEP BUTTON (YouTube) ---------- */
+.unlock-step {
+  display: grid;
+  grid-template-columns: 30px 1fr auto 30px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 21px 24px;
+  border-radius: 16px;
+  background: var(--grad-main);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: .92rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: var(--glow-md);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), filter .3s;
+}
+.unlock-step > i:first-child { font-size: 1.55rem; justify-self: start; }
+.unlock-step > i:last-child  { grid-column: -2 / -1; justify-self: end; font-size: 1rem; opacity: .9; }
+.unlock-step:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--glow-lg);
+  filter: brightness(1.06);
+}
+.unlock-step:active { transform: translateY(-1px); }
+.unlock-step:focus-visible { outline: 2px solid var(--red-bright); outline-offset: 3px; }
+.unlock-step.is-done {
+  background: linear-gradient(100deg, #1f8d62, #146b4a);
+  box-shadow: 0 0 26px rgba(61,220,151,.35);
+}
+
+/* ---------- 3b. SECOND TASK CARD + HONEST STATE CHIPS ---------- */
+.unlock-step--extra { margin-top: 12px; }
+
+.unlock-task-state {
+  justify-self: center;
+  font-size: .58rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.06);
+  color: #c9d6ea;
+  white-space: nowrap;
+}
+.unlock-task-state[hidden] { display: none; }
+.unlock-task-state.is-notstarted { color: #9fb2cf; border-color: rgba(159,178,207,.35); }
+.unlock-task-state.is-pending    { color: var(--ember); border-color: rgba(255,171,96,.45); animation: chipPulse 1.1s infinite alternate; }
+.unlock-task-state.is-manual     { color: var(--ember); border-color: rgba(255,171,96,.45); background: rgba(255,171,96,.10); }
+.unlock-task-state.is-verified   { color: #26e8ff; border-color: rgba(38,232,255,.5); background: rgba(38,232,255,.10); text-shadow: 0 0 12px rgba(38,232,255,.45); }
+.unlock-task-state.is-failed     { color: var(--red-bright); border-color: rgba(255,95,77,.5); background: rgba(255,95,77,.10); }
+.unlock-task-state.is-honor      { color: #9cc8ff; border-style: dashed; border-color: rgba(120,170,255,.45); background: rgba(120,170,255,.08); }
+
+@keyframes chipPulse { from { opacity: 1; } to { opacity: .45; } }
+
+#likeActionWrap { margin-top: 12px; }
+#likeBtn.is-busy { opacity: .65; pointer-events: none; }
+
+/* ---------- 4. PROGRESS ---------- */
+.unlock-count {
+  text-align: center;
+  color: var(--muted);
+  font-size: .98rem;
+  letter-spacing: .04em;
+}
+.unlock-count strong { color: var(--text); font-family: var(--font-display); }
+
+.unlock-bar {
+  height: 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .06);
+  overflow: hidden;
+}
+.unlock-bar span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--red-bright), var(--red), var(--red-deep));
+  box-shadow: 0 0 16px rgba(255,45,58,.65);
+  transition: width .7s var(--ease);
+}
+.unlock-bar.done span { width: 100%; }
+
+/* ---------- 5. VERIFY + CLAIM BUTTONS ---------- */
+#verifyBtn { letter-spacing: .12em; }
+#verifyBtn.is-busy { opacity: .6; pointer-events: none; }
+
+.unlock-claim-ready {
+  color: #1b0207 !important;
+  background: var(--grad-main) !important;
+  border-color: transparent !important;
+  box-shadow: var(--glow-md) !important;
+  cursor: pointer;
+}
+
+.unlock-help {
+  text-align: center;
+  color: var(--muted-2);
+  font-size: .88rem;
+  line-height: 1.6;
+  margin-top: -4px;
+}
+
+.unlock-foot-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 26px;
+  text-align: center;
+  color: var(--muted-2);
+  font-size: .86rem;
+}
+
+/* ---------- 6. FOOTER EXTRAS ---------- */
+.footer-contact { display: grid; gap: 8px; margin-top: 14px; color: var(--muted); font-size: .95rem; }
+.footer-contact i { color: var(--red-bright); width: 16px; }
+.footer-contact a { color: var(--text); border-bottom: 1px dashed rgba(255,95,77,.5); }
+.footer-follow { color: var(--muted); font-size: .95rem; margin-bottom: 16px; }
+
+/* =============================================================
+   7. ADMIN PANEL
+   ============================================================= */
+.adm-main {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 auto;
+  padding: calc(var(--nav-h) + 52px) 0 90px;
+}
+.adm-wrap { width: 100%; max-width: 1120px; margin-inline: auto; padding-inline: 24px; }
+
+.adm-head { text-align: center; margin-bottom: 34px; }
+.adm-head h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.adm-sub { color: var(--muted); }
+
+/* Gate (admin token) */
+.adm-gate {
+  max-width: 470px;
+  margin: 0 auto;
+  padding: 30px 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+  box-shadow: var(--glow-md);
+  display: grid;
+  gap: 16px;
+}
+.adm-gate h2 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: .1em; }
+
+/* Status banner */
+.adm-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  margin-bottom: 26px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+  font-size: .93rem;
+}
+.adm-banner i { color: var(--red-bright); }
+.adm-banner .adm-banner-title { color: var(--text); font-family: var(--font-display); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+.adm-banner--warn { border-color: rgba(255,171,96,.4); }
+.adm-banner--warn i, .adm-banner--warn .adm-banner-title { color: var(--ember); }
+
+/* Stats row */
+.adm-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 26px; }
+.adm-stat {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255,255,255,.035);
+  text-align: center;
+}
+.adm-stat b { display: block; font-family: var(--font-display); font-size: 1.5rem; color: var(--text); }
+.adm-stat span { color: var(--muted); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+
+/* Tabs */
+.adm-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+.adm-tab {
+  padding: 11px 22px;
+  border: 1px solid var(--line-2);
+  border-radius: 100px;
+  background: rgba(255,255,255,.03);
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition: all .25s var(--ease);
+}
+.adm-tab:hover { color: var(--text); border-color: rgba(255,95,77,.6); }
+.adm-tab.active {
+  color: #1b0207;
+  background: var(--grad-main);
+  border-color: transparent;
+  box-shadow: var(--glow-sm);
+}
+
+/* Panels */
+.adm-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  padding: 26px;
+}
+.adm-panel h2 {
+  font-size: .95rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+.adm-panel[hidden] { display: none; }
+
+/* Table */
+.adm-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.adm-table { width: 100%; border-collapse: collapse; min-width: 720px; }
+.adm-table th, .adm-table td { padding: 13px 12px; text-align: left; border-bottom: 1px solid rgba(255,95,77,.12); }
+.adm-table th {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: .68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.adm-table td { font-size: .93rem; color: var(--text); vertical-align: middle; }
+.adm-table tr:hover td { background: rgba(255,255,255,.03); }
+.adm-table .adm-url { color: var(--muted); font-size: .82rem; word-break: break-all; }
+.adm-table .adm-title-cell b { display: block; }
+.adm-statline { color: var(--muted); font-size: .82rem; white-space: nowrap; }
+.adm-statline i { color: var(--red-bright); font-size: .78rem; }
+.adm-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Chips / status pills */
+.chip {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.05);
+  font-family: var(--font-display);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.chip--on    { color: #3ddc97; border-color: rgba(61,220,151,.45); background: rgba(61,220,151,.10); }
+.chip--off   { color: var(--muted-2); }
+.chip--pending { color: var(--ember); border-color: rgba(255,171,96,.45); background: rgba(255,171,96,.10); }
+.chip--ok    { color: #3ddc97; border-color: rgba(61,220,151,.45); background: rgba(61,220,151,.10); }
+.chip--bad   { color: var(--red-bright); border-color: rgba(255,95,77,.45); background: rgba(255,95,77,.10); }
+
+/* Forms */
+.adm-form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.adm-field { display: grid; gap: 8px; }
+.adm-field--full { grid-column: 1 / -1; }
+.adm-field label {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.adm-field .adm-hint { color: var(--muted-2); font-size: .8rem; letter-spacing: 0; text-transform: none; font-family: var(--font-body); }
+.adm-field input, .adm-field select, .adm-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255,255,255,.05);
+  color: var(--text);
+  font: inherit;
+  font-size: .95rem;
+  transition: border-color .25s, box-shadow .25s;
+}
+.adm-field textarea { min-height: 88px; resize: vertical; }
+.adm-field input:focus, .adm-field select:focus, .adm-field textarea:focus {
+  outline: none;
+  border-color: rgba(255,95,77,.75);
+  box-shadow: 0 0 0 3px rgba(255,95,77,.16);
+}
+.adm-field input[readonly] { background: rgba(255,255,255,.03); color: var(--muted); }
+.adm-check { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .92rem; }
+.adm-check input { width: 18px; height: 18px; accent-color: var(--red); }
+
+.adm-btns { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 6px; }
+.adm-btns .btn { padding: 12px 26px; font-size: .74rem; }
+
+.adm-empty { text-align: center; color: var(--muted-2); padding: 34px 10px; }
+
+/* Tiny helper text + inline code */
+.adm-note { color: var(--muted-2); font-size: .86rem; line-height: 1.6; }
+.adm-code {
+  display: inline-block;
+  padding: 2px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(0,0,0,.35);
+  color: var(--red-bright);
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: .84rem;
+}
+.adm-block {
+  margin-top: 12px;
+  padding: 13px 15px;
+  border: 1px dashed var(--line-2);
+  border-radius: 12px;
+  background: rgba(0,0,0,.28);
+  color: var(--muted);
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: .82rem;
+  line-height: 1.7;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+/* ---------- 8. RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .adm-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .unlock-main { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 66px; }
+  .unlock-card { padding: 26px 20px; gap: 18px; }
+  .unlock-step { grid-template-columns: 26px 1fr auto 26px; padding: 18px 16px; font-size: .8rem; letter-spacing: .06em; }
+  .unlock-step > i:first-child { font-size: 1.3rem; }
+  .adm-wrap { padding-inline: 18px; }
+  .adm-form { grid-template-columns: 1fr; }
+  .adm-panel { padding: 20px 16px; }
+  .unlock-title { font-size: clamp(1.5rem, 7vw, 2rem); }
+}
+
+@media (max-width: 420px) {
+  .unlock-card { padding: 22px 15px; border-radius: 20px; }
+  .unlock-pill { font-size: .6rem; letter-spacing: .16em; padding: 8px 14px; }
+  .adm-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .adm-tab { padding: 10px 16px; font-size: .68rem; }
+  .unlock-card .btn, .adm-gate .btn { width: 100%; }
+  .adm-btns .btn { width: auto; }
+}
