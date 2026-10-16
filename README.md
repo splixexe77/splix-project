@@ -221,11 +221,60 @@ Full configuration guide: **`server/README.md`**.
 
 ---
 
-## 🚀 Deploying publicly (Render-ready, not deployed yet)
+## 🌍 Going public for free — no card (chosen path)
 
-The project is prepared for HTTPS hosting — **no deployment has been
-performed and no repository has been pushed**; the dashboard steps below
-are yours to run.
+**Chosen: Cloudflare quick tunnel** — the only option found in 2026 that
+meets *every* hard requirement at once: genuinely free forever, **no card,
+no account, no domain**, full persistence, zero code changes, and all
+features/security untouched (your data never leaves this PC's disk, so no
+seed migration is even needed). Compared against official docs:
+
+| Provider (official source) | Verdict |
+|---|---|
+| Render Free | No card, but **free instances have no persistent disks** — every redeploy would wipe your data ❌ |
+| Railway | 30-day trial credit, then a **$1/month paid plan** ❌ |
+| Fly.io | **Credit card required** after the 7-day trial ❌ |
+| Northflank Sandbox | Signup has no card field, but billing docs: *“all users must add a payment method to start creating resources, regardless of plan”* ❌ |
+| PythonAnywhere Free | Free outbound access is an **allowlist without Google/Discord/YouTube** (OAuth/webhook/API would break); always-on tasks are paid-only ❌ |
+| Vercel / Netlify / Cloudflare Pages | Serverless/static — no long-running process and no writable disk for this file store ❌ |
+| **Cloudflare quick tunnel** | Free `https://…trycloudflare.com`, **no signup whatsoever**, persistence = this PC's existing data ✅ |
+
+**One command:**
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-public.ps1
+```
+
+The script starts the free tunnel (`cloudflared` is already installed),
+writes the printed URL into `server/.env` as `PUBLIC_URL` (plus
+`TRUST_PROXY=true`, which keeps per-visitor rate limiting correct behind
+the proxy), restarts the server, and verifies `/health` through the public
+URL. A backup `server/.env.<stamp>.bak` is saved first (git-ignored).
+Rerun any time to rotate the URL.
+
+**Limitations (from Cloudflare's official docs):** the hostname changes on
+every run; the URL lives only while the `cloudflared` process runs; no
+uptime guarantee; 200 in-flight requests; no Server-Sent Events; your PC
+must stay on. Optional hardening: add `--allowed-mail your@email` to the
+tunnel for an email one-time-PIN gate. Source:
+[Quick Tunnels](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/).
+
+**Stop / return to localhost-only:**
+
+```powershell
+Get-Process cloudflared | Stop-Process
+```
+
+then set `PUBLIC_URL=http://127.0.0.1:8099` and `TRUST_PROXY=false` in
+`server/.env` and restart the server.
+
+---
+
+## 🚀 Deploying publicly (Render blueprint, optional)
+
+The project is prepared for HTTPS hosting — the repository is on GitHub;
+all provider dashboards (Render below, or the free no-card tunnel above)
+remain yours to run.
 
 **Ready-made blueprint:** `render.yaml`
 
